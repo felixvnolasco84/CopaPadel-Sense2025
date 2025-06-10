@@ -1,0 +1,365 @@
+
+<footer class="contaniner-foo">
+  <div class="footercus">
+    <div class="box-left">
+      <div class="box-left-container">
+        <h3 class="box-left-title">VOLVAMOS <br> AL INICIO.</h3>
+        <p class="small-text">
+          Suscríbete y recibe los mejores tips,<br>
+          promociones, noticias, todo para mejorar<br>
+          tu juego.
+        </p>
+      </div>
+      {% render 'newsletter-footer-form' %}
+      <p class="extra-small-text">Al suscribirte aceptas nuestro aviso de privacidad.</p>
+    </div>
+    <div class="box-right">
+      <div class="box-1">
+        <span class="menu-social">MENU</span>
+        <div>
+          <a href="/collections/all">
+            <li>Productos</li>
+          </a>
+          <a href="/pages/nosotros">
+            <li>Nosotros</li>
+          </a>
+          <a href="/pages/contacto">
+            <li>Contacto</li>
+          </a>
+        </div>
+
+      </div>
+      <div class="box-2">
+        <span class="menu-social">REDES SOCIALES</span>
+        <div>
+          <a class="text-decoration_none" href="https://www.instagram.com/copapadel/" target="_blank">
+            <li class="item">
+              {% render 'icon-instagram' %}
+              <span class="item-text">Instagram</span>
+            </li>
+          </a>
+        </div>
+        <div>
+          <a class="text-decoration_none" href="https://www.tiktok.com/@copa.padel?is_from_webapp=1&sender_device=pc" target="_blank">
+            <li class="item">
+              {% render 'icon-tiktok' %}
+              <span class="item-text">TikTok</span>
+            </li>
+          </a>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <div class="sub-footer">
+
+    <h3>LOS CREADORES <br> DEL PÁDEL</h3>
+
+    <div class="sub-footer-container">
+      <div class="reservs">
+        <img src="https://cdn.shopify.com/s/files/1/0683/8442/4244/files/Logo_CopaWhite.png?v=1698787705" alt="COPA" class="footer-copa__logo" width="210px" />
+        {% comment %} <p>Copa Corcuera Padel 1969®</p> {% endcomment %}
+      </div>
+      <div class="terms">
+        <a href="/pages/terminos">
+          <li>Términos y Condiciones</li>
+        </a>
+        <a href="/pages/privacidad">
+          <li>Aviso de Privacidad</li>
+        </a>
+        <a href="/pages/envios">
+          <li>Envíos</li>
+        </a>
+        <a href="/pages/reembolso">
+          <li>Políticas de Reembolso</li>
+        </a>
+      </div>
+    </div>
+
+
+  </div>
+
+</footer>
+
+
+
+
+<style>
+
+:root {
+  --color-primary: #163E35;
+  --color-text: #8e8e8e;
+  --color-bg: #F6F6F8;
+  --color-white: #ffffff;
+}
+
+.section {
+  border-radius: 13px;
+  overflow: hidden;
+}
+
+.contaniner-foo {
+  font-family: "ABCfina", sans-serif;
+  max-width: 1852px;
+  margin: 20px 20px;
+  background-color: var(--color-bg);
+  border-radius: 13px;
+  overflow: hidden;
+
+}
+
+@media screen and (min-width: 1441px) {
+  .contaniner-foo {
+    margin: 25px auto;
+    max-width: 1852px;
+  }
+
+}
+
+/* ====================
+   FOOTER SUPERIOR
+   ==================== */
+.footercus {
+  display: flex;
+  border-radius: 13px 13px 0 0;
+  overflow: hidden;
+  flex-wrap: wrap;
+  border-top: 1px solid rgba(255,255,255,0.25);
+  border-bottom: 1px solid rgba(255,255,255,0.25);
+  color: var(--color-text);
+}
+
+.footercus .box-left {
+  flex: 1 1 50%;
+  padding: 50px;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  background: var(--color-bg);
+}
+
+.box-left-title {
+  letter-spacing: normal;
+  font-size: 50px;
+  line-height: 70px;
+  color: var(--color-primary);
+  margin: 0;
+  margin-bottom: 24px;
+}
+
+.small-text {
+  font-size: 20px;
+  line-height: 40px;
+  color: var(--color-text);
+  margin: 0;
+}
+
+.extra-small-text {
+  margin: 0;
+  font-size: 18px;
+  color: var(--color-text);
+  text-align: left;
+}
+
+.footercus .box-right {
+  flex: 1 1 50%;
+  padding: 50px 100px;
+  display: flex;
+  justify-content: space-between;
+  background: var(--color-bg);
+  color: var(--color-white);
+}
+
+.box-right .box-1,
+.box-right .box-2 {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.menu-social {
+  font-size: 25px;
+  font-weight: 700;
+  color: var(--color-primary);
+}
+
+.box-right a {
+  text-decoration: none;
+  color: var(--color-text);
+}
+
+.box-right a li {
+  list-style: none;
+  font-size: 20px;
+  cursor: pointer;
+}
+
+.box-right .item {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.item-text {
+  font-size: 20px;
+  font-family: "ABCfina";
+  color: var(--color-text);
+}
+
+/* soporte sólo en móvil */
+.box-soporte-mobile {
+  display: none;
+}
+
+
+
+@media (max-width: 749px) {
+
+
+.box-right a li {
+   font-size: 14px;
+}
+
+.contaniner-foo {
+  margin: 20px 5px 20px 5px;
+}
+
+  .footercus {
+    flex-direction: column;
+  }
+
+  .footercus .box-left,
+  .footercus .box-right {
+    padding: 20px;
+    letter-spacing: normal;
+    gap: 20px;
+    width: 100%;
+  }
+
+  .box-left-title {
+    font-size: 25px;
+    margin-bottom: 20px;
+    line-height: normal;
+  }
+
+  .small-text {
+    font-size: 14px;
+    line-height: normal;
+  }
+
+  .extra-small-text {
+    font-size: 12px;
+    margin: 0;
+  }
+
+  .box-right {
+    border-top: 1px solid rgba(255,255,255,0.25);
+    padding-top: 25px;
+    gap: 24px;
+  }
+
+  .box-right .item-text {
+    font-size: 13px;
+  }
+
+  .menu-social {
+    font-size: 14px;
+  }
+
+  .box-soporte-mobile {
+    display: flex;
+    flex-direction: column;
+    padding: 0 18px 25px;
+  }
+
+  .box-soporte-mobile span {
+    margin-bottom: 18px;
+    font-size: 14px;
+    color: var(--color-primary);
+  }
+
+  .box-soporte-mobile li {
+    list-style: none;
+    font-size: 13px;
+    line-height: 30px;
+    color: var(--color-text);
+    cursor: pointer;
+  }
+}
+
+/* ====================
+   SUB-FOOTER INFERIOR
+   ==================== */
+.sub-footer {
+  background-color: var(--color-primary);
+  color: var(--color-white);
+}
+
+.sub-footer h3 {
+  letter-spacing: normal;
+  font-size: 37px;
+  line-height: 41px;
+  color: var(--color-white);
+  margin: 0;
+  padding: 50px;
+}
+
+.sub-footer-container {
+  letter-spacing: normal;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 50px 50px;
+  gap: 24px;
+}
+
+.sub-footer .terms,
+.sub-footer .reservs {
+  display: flex;
+  gap: 24px;
+}
+
+.sub-footer .terms a {
+  color: var(--color-white);
+  text-decoration: underline;
+  list-style: none;
+  font-size: 18px;
+}
+
+.sub-footer .reservs p {
+  margin: 0;
+  font-size: 18px;
+}
+
+@media (max-width: 749px) {
+  .sub-footer h3 {
+    font-size: 25px;
+    padding: 20px;
+  }
+
+  .sub-footer-container {
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 0 20px 20px;
+    gap: 20px;
+  }
+
+  .sub-footer .terms a {
+    font-size: 14px;
+  }
+
+  .sub-footer .terms,
+  .sub-footer .reservs {
+    flex-direction: column;
+    gap: 12px;
+    align-items: flex-start;
+  }
+
+  .sub-footer .reservs p {
+    font-size: 11px;
+  }
+}
+
+</style>
+

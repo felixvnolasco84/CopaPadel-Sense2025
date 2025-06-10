@@ -1,0 +1,211 @@
+{% comment %}
+Section: Video Background
+File: sections/video-background.liquid
+Permite uno o más bloques de video con:
+- Video MP4 desktop y mobile
+- Imágenes de fallback para desktop/mobile
+- Overlay degradado configurable
+- Texto y botón encima
+- Padding/margin configurables
+{% endcomment %}
+
+<section id="video-background-{{ section.id }}" class="video-background" style="margin: {{ section.settings.margin }}; padding: {{ section.settings.padding }};">
+  {% for block in section.blocks %}
+    <div class="videoBox">
+      <!-- Fallback Images -->
+      <img src="{{ block.settings.cover_image | img_url: 'master' }}" alt="" class="bg-img desktop-only" />
+      <img src="{{ block.settings.cover_image_mobile | img_url: 'master' }}" alt="" class="bg-img mobile-only" />
+
+      <!-- Video for Desktop -->
+      {% if block.settings.video_url != blank %}
+        <div class="fullscreen-video-wrap desktop-only">
+          <video autoplay loop muted playsinline poster="{{ block.settings.cover_image | img_url: 'master' }}">
+            <source src="{{ block.settings.video_url }}" type="video/mp4">
+          </video>
+        </div>
+      {% endif %}
+
+      <!-- Video for Mobile -->
+      {% if block.settings.video_url_mobile != blank %}
+        <div class="fullscreen-video-wrap mobile-only">
+          <video autoplay loop muted playsinline poster="{{ block.settings.cover_image_mobile | img_url: 'master' }}">
+            <source src="{{ block.settings.video_url_mobile }}" type="video/mp4">
+          </video>
+        </div>
+      {% endif %}
+
+      <!-- Overlay Gradient -->
+      <div class="overlay" style="background: linear-gradient(0deg, rgba(0,0,0,0.4) 0%, rgba(0,0,0,0.1) 100%); opacity: {{ block.settings.overlay_opacity | divided_by: 100 }};"></div>
+
+      <!-- Content -->
+      <div class="videoBoxInfo">
+        {% if block.settings.subtitle != blank %}
+          <h3 class="videoBoxSubtitle" style="color: {{ block.settings.color_text }};">{{ block.settings.subtitle }}</h3>
+        {% endif %}
+        {% if block.settings.title != blank %}
+          <h2 class="videoBoxTitle" style="color: {{ block.settings.color_text }};">{{ block.settings.title }}</h2>
+        {% endif %}
+        {% if block.settings.button_label != blank and block.settings.button_link != blank %}
+          <a href="{{ block.settings.button_link }}" class="videoBoxBtn" style="background: {{ block.settings.color_btn_bg }}; color: {{ block.settings.color_btn_text }};">
+            {{ block.settings.button_label }}
+          </a>
+        {% endif %}
+      </div>
+    </div>
+  {% endfor %}
+</section>
+
+<style>
+.video-background {
+  position: relative;
+  overflow: hidden;
+}
+.videoBox {
+  position: relative;
+  aspect-ratio: 16/9;
+  border-radius: 0 0 13px 13px;
+  overflow: hidden;
+  width: 100%;
+  display: flex;
+  align-items: flex-end;
+  justify-content: flex-start;
+}
+
+@media screen and (max-width: 768px) {
+  .videoBox {
+    aspect-ratio: 3/4;  
+  }
+
+  .videoBoxInfo {
+    padding: 20px !important;
+  }
+
+  .videoBoxSubtitle {
+    margin-bottom: 20px !important;
+  }
+
+  .videoBoxTitle {
+    font-size: 2rem !important;
+    
+  }
+
+  .videoBoxBtn {
+    font-size: 16px !important;    
+  }
+}
+
+.bg-img, .fullscreen-video-wrap video {
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  object-fit: cover;
+  z-index: 1;
+}
+.desktop-only { display: none; }
+.mobile-only { display: block; }
+@media (min-width: 768px) {
+  .desktop-only { display: block; }
+  .mobile-only { display: none; }
+}
+.fullscreen-video-wrap {
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  overflow: hidden;
+  z-index: 1;
+}
+.overlay {
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  pointer-events: none;
+  z-index: 2;
+}
+.videoBoxInfo {
+  position: relative;
+  z-index: 3;  
+  padding: 100px 45px 80px;
+  max-width: 800px;
+  z-index: 1;
+}
+.videoBoxSubtitle {
+  font-size: 30px;
+  line-height: 40px;
+  margin-bottom: 0.5rem;
+  font-weight: normal;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+.videoBoxTitle {
+  font-size: 51px ;
+  margin-bottom: 2rem;
+  margin-top: 0; 
+  text-transform: uppercase;
+  font-weight: 300;
+  letter-spacing: 2px;
+  line-height: 1.2;
+}
+.videoBoxBtn {  
+    font-size: 20px;
+    font-family: "ABCfina";
+    padding: 8px 65px;
+    text-decoration: none;
+    color: #ffffff;
+    background: rgba(0, 0, 0, 0);
+    border: 1px solid white;
+    border-radius: 23px;
+    margin-top: 10px;
+    transition: 0.5s;
+}
+.videoBoxBtn:hover {
+  background: #fff !important;
+  color: #000 !important;
+}
+</style>
+
+{% schema %}
+{
+  "name": "Video Background",
+  "settings": [
+    { "type": "text", "id": "margin", "label": "Margin (CSS)", "default": "0" },
+    { "type": "text", "id": "padding", "label": "Padding (CSS)", "default": "0" }
+  ],
+  "blocks": [
+    {
+      "type": "video",
+      "name": "Video Slide",
+      "settings": [
+        { "type": "url", "id": "video_url", "label": "Video URL (Desktop)" },
+        { "type": "url", "id": "video_url_mobile", "label": "Video URL (Mobile)" },
+        { "type": "image_picker", "id": "cover_image", "label": "Cover Image (Desktop)" },
+        { "type": "image_picker", "id": "cover_image_mobile", "label": "Cover Image (Mobile)" },
+        { "type": "range", "id": "overlay_opacity", "label": "Overlay Opacity (%)", "min": 0, "max": 100, "step": 1, "default": 50 },
+        { "type": "text", "id": "subtitle", "label": "Subtitle", "default": "COPA PADEL" },
+        { "type": "text", "id": "title", "label": "Title", "default": "LOS CREADORES DEL PADEL" },
+        { "type": "text", "id": "button_label", "label": "Button Label", "default": "VER MÁS" },
+        { "type": "url", "id": "button_link", "label": "Button Link" },
+        { "type": "color", "id": "color_text", "label": "Text Color", "default": "#FFFFFF" },
+        { "type": "color", "id": "color_btn_bg", "label": "Button Background", "default": "rgba(0,0,0,0)" },
+        { "type": "color", "id": "color_btn_text", "label": "Button Text Color", "default": "#FFFFFF" }
+      ]
+    }
+  ],
+  "max_blocks": 3,
+  "presets": [
+    {
+      "name": "Video Background Custom",
+      "category": "Media",
+      "blocks": [
+        {
+          "type": "video",
+          "settings": {
+            "subtitle": "COPA PADEL",
+            "title": "LOS CREADORES DEL PADEL",
+            "button_label": "VER MÁS"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

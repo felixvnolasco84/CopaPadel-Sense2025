@@ -1,0 +1,224 @@
+ {
+  "sections": {
+    "video_background_qVkw6R": {
+      "type": "video-background",
+      "blocks": {
+        "video_gQjGLL": {
+          "type": "video",
+          "settings": {
+            "video_url": "https://cdn.shopify.com/videos/c/o/v/0f7b27cb571c4315abf8ade302fb264f.mov",
+            "video_url_mobile": "https://cdn.shopify.com/videos/c/o/v/0f7b27cb571c4315abf8ade302fb264f.mov",
+            "cover_image": "shopify://shop_images/STILL_2.jpg",
+            "cover_image_mobile": "shopify://shop_images/STILL_2.jpg",
+            "overlay_opacity": 50,
+            "subtitle": "COPA PADEL",
+            "title": "LOS CREADORES <br> DEL PADEL",
+            "button_label": "VER MÁS",
+            "button_link": "shopify://pages/todos-los-productos",
+            "color_text": "#ffffff",
+            "color_btn_bg": "#173e35",
+            "color_btn_text": "#ffffff"
+          }
+        }
+      },
+      "block_order": [
+        "video_gQjGLL"
+      ],
+      "name": "Video Background Custom",
+      "settings": {
+        "margin": "0",
+        "padding": "0"
+      }
+    },
+    "product_custom_cR4YUa": {
+      "type": "product-custom",
+      "name": "Custom Product",
+      "settings": {}
+    },
+    "featured_collection_pzcGCV": {
+      "type": "featured-collection",
+      "name": "t:sections.featured-collection.presets.name",
+      "settings": {
+        "collection": "variantes-test",
+        "products_to_show": 25,
+        "title": "PROMOCIONES",
+        "heading_size": "h2",
+        "description": "",
+        "show_description": false,
+        "description_style": "body",
+        "columns_desktop": 4,
+        "enable_desktop_slider": true,
+        "full_width": false,
+        "show_view_all": false,
+        "view_all_style": "solid",
+        "color_scheme": "scheme-2",
+        "image_ratio": "square",
+        "image_shape": "default",
+        "show_secondary_image": true,
+        "show_vendor": false,
+        "show_rating": true,
+        "quick_add": "standard",
+        "columns_mobile": "2",
+        "swipe_on_mobile": false,
+        "padding_top": 36,
+        "padding_bottom": 36
+      }
+    },
+    "copa_product_showcase_XTjRtj": {
+      "type": "CopaProductShowcase",
+      "blocks": {
+        "product_slide_EPJ6MJ": {
+          "type": "product_slide",
+          "settings": {
+            "product": "green-backpack",
+            "product_image": "shopify://shop_images/Verde-Frontal.jpg",
+            "swatch_image": "shopify://shop_images/Reverso.jpg",
+            "product_name": "Green Backpack",
+            "product_description": "Está diseñada con poliéster extremadamente resistente, lo que la hace increíblemente duradera. Además, cuenta con el sistema de sujeción Copa Stick para asegurar tu raqueta de pádel en todo momento."
+          }
+        },
+        "product_slide_7NtfCN": {
+          "type": "product_slide",
+          "settings": {
+            "product": "funda-verde",
+            "product_image": "shopify://shop_images/Verde-Detalle-1.jpg",
+            "swatch_image": "shopify://shop_images/Verde-Completa.jpg",
+            "product_name": "Funda Verde",
+            "product_description": "Protege tu pala, funda diseñada especialmente para una mejor protección y durabilidad. Correa ajustable para el hombro.Bolsillo interior para llevar tus pertenencias, como llaves, cartera, etc."
+          }
+        },
+        "product_slide_wCN9Jf": {
+          "type": "product_slide",
+          "settings": {
+            "product": "orange-backpack",
+            "product_image": "shopify://shop_images/Naranja-Frontal.jpg",
+            "swatch_image": "shopify://shop_images/Detalle-JoinTheLegacy.jpg",
+            "product_name": "Orange Backpack",
+            "product_description": "Está diseñada con poliéster extremadamente resistente, lo que la hace increíblemente duradera. Además, cuenta con el sistema de sujeción Copa Stick para asegurar tu raqueta de pádel en todo momento."
+          }
+        },
+        "product_slide_3n6pHU": {
+          "type": "product_slide",
+          "settings": {
+            "product": "funda-blanca",
+            "product_image": "shopify://shop_images/Roja-Detalle-1.jpg",
+            "swatch_image": "shopify://shop_images/Roja-Completa.jpg",
+            "product_name": "Funda Blanca",
+            "product_description": "Protege tu pala, funda diseñada especialmente para una mejor protección y durabilidad. Correa ajustable para el hombro.Bolsillo interior para llevar tus pertenencias, como llaves, cartera, etc."
+          }
+        },
+        "product_slide_DkfNWt": {
+          "type": "product_slide",
+          "settings": {
+            "product": "pink-backpack",
+            "product_image": "shopify://shop_images/Rosa-Frontal.jpg",
+            "swatch_image": "shopify://shop_images/Detalle-PlayCopa.jpg",
+            "product_name": "Pink Backpack",
+            "product_description": "Está diseñada con poliéster extremadamente resistente, lo que la hace increíblemente duradera. Además, cuenta con el sistema de sujeción Copa Stick para asegurar tu raqueta de pádel en todo momento."
+          }
+        },
+        "product_slide_tWgUmQ": {
+          "type": "product_slide",
+          "settings": {
+            "product": "funda-amarilla",
+            "product_image": "shopify://shop_images/Amarilla-Detalle-1.jpg",
+            "swatch_image": "shopify://shop_images/Amarilla-Completa.jpg",
+            "product_name": "Funda Amarilla",
+            "product_description": "Protege tu pala, funda diseñada especialmente para una mejor protección y durabilidad. Correa ajustable para el hombro.Bolsillo interior para llevar tus pertenencias, como llaves, cartera, etc."
+          }
+        }
+      },
+      "block_order": [
+        "product_slide_EPJ6MJ",
+        "product_slide_7NtfCN",
+        "product_slide_wCN9Jf",
+        "product_slide_3n6pHU",
+        "product_slide_DkfNWt",
+        "product_slide_tWgUmQ"
+      ],
+      "settings": {
+        "section_title": "",
+        "layout": "full"
+      }
+    },
+    "testimonials_L3BkQC": {
+      "type": "testimonials",
+      "blocks": {
+        "testimonial_mmcjAY": {
+          "type": "testimonial",
+          "settings": {
+            "source_testimonial": "shopify://shop_images/instagram-2016-6.svg",
+            "testimonial_name": "Toño De la Vega",
+            "testimonial_role": "Campeón Amateur",
+            "testimonial_description": "Me pareció una raqueta muy bien balanceada entre poder y control. Es ligera, lo cual ayuda mucho a la gente que sufre de codo de tenista. Despide muy bien a la hora de bolear y rematar... Me encantó la raqueta",
+            "testimonial_image": "shopify://shop_images/TonoVega.png"
+          }
+        },
+        "testimonial_7YxcD8": {
+          "type": "testimonial",
+          "settings": {
+            "source_testimonial": "shopify://shop_images/instagram-2016-6.svg",
+            "testimonial_name": "Pao Abdo",
+            "testimonial_role": "Jugador Amateur",
+            "testimonial_description": "Yo las tendría de colección, pero es imposible no jugar pádel con ellas..",
+            "testimonial_image": "shopify://shop_images/PaoAbdo.png"
+          }
+        },
+        "testimonial_d4zry8": {
+          "type": "testimonial",
+          "settings": {
+            "source_testimonial": "shopify://shop_images/instagram-2016-6.svg",
+            "testimonial_name": "Paco Fernández",
+            "testimonial_role": "Ex número 1 México",
+            "testimonial_description": "Muy ligera, tienes mucho toque, no tiene demasiada potencia pero trae mucho equilibrio, se la presté a todos con los que jugué y a todos les gustó mucho.",
+            "testimonial_image": "shopify://shop_images/PacoFernandez.png"
+          }
+        },
+        "testimonial_wTTARe": {
+          "type": "testimonial",
+          "settings": {
+            "source_testimonial": "shopify://shop_images/instagram-2016-6.svg",
+            "testimonial_name": "Juanii Padel",
+            "testimonial_role": "Jugador Profesional",
+            "testimonial_description": "Lo que más me gusta es que tiene el punto dulce grande, puedo golpear en cualquier parte de la cara de la pala y el tacto es el mismo y me brinda mucho control y manejabilidad.",
+            "testimonial_image": "shopify://shop_images/JuaniiPadel.png"
+          }
+        }
+      },
+      "block_order": [
+        "testimonial_mmcjAY",
+        "testimonial_7YxcD8",
+        "testimonial_d4zry8",
+        "testimonial_wTTARe"
+      ],
+      "name": "Testimoniales",
+      "settings": {
+        "section_title": "Testiomonios",
+        "layout": "full"
+      }
+    },
+    "17479526462b8b45c7": {
+      "type": "apps",
+      "blocks": {
+        "socialwidget_instafeed_base_widget_mftifa": {
+          "type": "shopify://apps/socialwidget-instafeed/blocks/base-widget/508b8d5b-b176-4dc6-a0ba-2b222db6eb79",
+          "settings": {}
+        }
+      },
+      "block_order": [
+        "socialwidget_instafeed_base_widget_mftifa"
+      ],
+      "settings": {
+        "include_margins": true
+      }
+    }
+  },
+  "order": [
+    "video_background_qVkw6R",
+    "product_custom_cR4YUa",
+    "featured_collection_pzcGCV",
+    "copa_product_showcase_XTjRtj",
+    "testimonials_L3BkQC",
+    "17479526462b8b45c7"
+  ]
+}

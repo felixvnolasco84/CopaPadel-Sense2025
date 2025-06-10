@@ -1,0 +1,689 @@
+{{ 'base.css' | asset_url | stylesheet_tag }}
+{{ 'component-price.css' | asset_url | stylesheet_tag }}
+{{ 'component-slider.css' | asset_url | stylesheet_tag }}
+{{ 'section-main-product.css' | asset_url | stylesheet_tag }}
+{{ 'slick-theme.css' | asset_url | stylesheet_tag }}
+{{ 'slick.css' | asset_url | stylesheet_tag }}
+
+<script src="{{ 'product-form.js' | asset_url }}" defer="defer"></script> 
+<script src="{{ 'jquery-3.7.1.min.js' | asset_url }}" defer="defer"></script>
+<script src="{{ 'slick.min.js' | asset_url }}" defer="defer"></script>
+
+{% schema %}
+{
+  "name": "Copa Product Showcase",
+  "settings": [
+    {
+      "type": "text",
+      "id": "section_title",
+      "label": "Section Title",
+      "default": "Featured Products"
+    },
+    {
+      "type": "select",
+      "id": "layout",
+      "label": "Layout",
+      "options": [
+        {
+          "value": "full",
+          "label": "Full Width"
+        },
+        {
+          "value": "contained",
+          "label": "Contained"
+        }
+      ],
+      "default": "full"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "product_slide",
+      "name": "Product Slide",
+      "settings": [
+        {
+          "type": "product",
+          "id": "product",
+          "label": "Product"
+        },
+        {
+          "type": "image_picker",
+          "id": "product_image",
+          "label": "Product Image"
+        },
+        {
+          "type": "image_picker",
+          "id": "swatch_image",
+          "label": "Swatch Image"
+        },
+        {
+          "type": "text",
+          "id": "product_name",
+          "label": "Product Name"
+        },
+        {
+          "type": "text",
+          "id": "product_description",
+          "label": "Product Description"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Copa Product Showcase",
+    }
+  ]
+}
+{% endschema %}
+
+{%- assign product_form_id = 'quick-add-' | append: section.id | append: product.id -%}
+
+<div class="copa-product-showcase {% if section.settings.layout == 'contained' %}container{% endif %}">
+  <div class="mobile-carrousel">
+    {% for block in section.blocks %}
+      {% if block.type == 'product_slide' %}
+        {% assign product = block.settings.product %}
+        <div class="copa-model-slide" data-index="{{ forloop.index0 }}">
+          {% if block.settings.product_image %}
+            {{
+              block.settings.product_image
+              | img_url: 'master'
+              | img_tag: block.settings.product.title, 'copa-model-image'
+            }}
+          {% else %}
+            {{ 'image' | placeholder_svg_tag: 'copa-model-image placeholder' }}
+          {% endif %}
+          <div class="copa-product-swatch">
+            {% if block.settings.swatch_image %}
+              {{
+                block.settings.swatch_image
+                | img_url: 'master'
+                | img_tag: block.settings.product_name, 'copa-swatch-image'
+              }}
+            {% endif %}
+          </div>
+
+          <div class="copa-product-info-mobile">
+            <h2 class="copa-product-title">{{ product.title }}</h2>
+            <p class="copa-product-subtitle">{{ block.settings.product_description }}</p>
+            {% assign product_form_id = 'quick-add-' | append: section.id | append: product.id %}
+            <div class="quick-add no-js-hidden">
+            {%- liquid
+              assign qty_rules = false
+              if product.selected_or_first_available_variant.quantity_rule.min > 1 or product.selected_or_first_available_variant.quantity_rule.max != null or product.selected_or_first_available_variant.quantity_rule.increment > 1
+                assign qty_rules = true
+              endif
+            -%}
+            {%- if product.variants_count > 1 or qty_rules -%}
+              <modal-opener data-modal="#QuickAdd-{{ product.id }}">
+                <button
+                  id="{{ product_form_id }}-submit"
+                  type="submit"
+                  name="add"
+                  class="quick-add__submit button button--full-width button--secondary{% if horizontal_quick_add %} card--horizontal__quick-add animate-arrow{% endif %}"
+                  aria-haspopup="dialog"
+                  aria-labelledby="{{ product_form_id }}-submit title-{{ section_id }}-{{ product.id }}"
+                  data-product-url="{{ product.url }}"
+                >
+                  {{ 'products.product.choose_options' | t }}
+                  {%- if horizontal_quick_add -%}
+                    <span class="icon-wrap">
+                      {{- 'icon-arrow.svg' | inline_asset_content -}}
+                    </span>
+                  {%- endif -%}
+                  {%- render 'loading-spinner' -%}
+                </button>
+              </modal-opener>
+              <quick-add-modal id="QuickAdd-{{ product.id }}" class="quick-add-modal">
+                <div
+                  role="dialog"
+                  aria-label="{{ 'products.product.choose_product_options' | t: product_name: product.title | escape }}"
+                  aria-modal="true"
+                  class="quick-add-modal__content global-settings-popup"
+                  tabindex="-1"
+                >
+                  <button
+                    id="ModalClose-{{ product.id }}"
+                    type="button"
+                    class="quick-add-modal__toggle"
+                    aria-label="{{ 'accessibility.close' | t }}"
+                  >
+                    {{- 'icon-close.svg' | inline_asset_content -}}
+                  </button>
+                  <div id="QuickAddInfo-{{ product.id }}" class="quick-add-modal__content-info"></div>
+                </div>
+              </quick-add-modal>
+            {%- else -%}
+              <product-form data-section-id="{{ section.id }}">
+                {%- form 'product',
+                  product,
+                  id: product_form_id,
+                  class: 'form',
+                  novalidate: 'novalidate',
+                  data-type: 'add-to-cart-form'
+                -%}
+                  <input
+                    type="hidden"
+                    name="id"
+                    value="{{ product.selected_or_first_available_variant.id }}"
+                    class="product-variant-id"
+                    {% if product.selected_or_first_available_variant.available == false %}
+                      disabled
+                    {% endif %}
+                  >
+                  <button
+                    id="{{ product_form_id }}-submit"
+                    type="submit"
+                    name="add"
+                    class="quick-add__submit button button--full-width button--secondary{% if horizontal_quick_add %} card--horizontal__quick-add{% endif %}"
+                    aria-haspopup="dialog"
+                    aria-labelledby="{{ product_form_id }}-submit title-{{ section_id }}-{{ product.id }}"
+                    aria-live="polite"
+                    data-sold-out-message="true"
+                    {% if product.selected_or_first_available_variant.available == false %}
+                      disabled
+                    {% endif %}
+                  >
+                    <span>
+                      {%- if product.selected_or_first_available_variant.available -%}
+                        {{ 'products.product.add_to_cart' | t }}
+                      {%- else -%}
+                        {{ 'products.product.sold_out' | t }}
+                      {%- endif -%}
+                    </span>
+                    <span class="sold-out-message hidden">
+                      {{ 'products.product.sold_out' | t }}
+                    </span>
+                    {%- if horizontal_quick_add -%}
+                      <span class="icon-wrap">
+                        {{- 'icon-plus.svg' | inline_asset_content -}}
+                      </span>
+                    {%- endif -%}
+                    {%- render 'loading-spinner' -%}
+                  </button>
+                {%- endform -%}
+              </product-form>
+            {%- endif -%}
+          </div>
+          </div>
+
+          <div class="copa-pagination">
+            <span class="copa-current-slide">{{ forloop.index }}</span>/<span class="copa-total-slides">
+              {{- section.blocks.size -}}
+            </span>
+          </div>
+        </div>
+      {% endif %}
+    {% endfor %}
+  </div>
+
+  <div class="copa-product-grid-container">
+    <div class="left-carrousel">
+      {% for block in section.blocks %}
+        {% if block.type == 'product_slide' %}
+          <div class="copa-model-slide" data-index="{{ forloop.index0 }}">
+            {% if block.settings.product_image %}
+              {{
+                block.settings.product_image
+                | img_url: 'master'
+                | img_tag: block.settings.product.title, 'copa-model-image'
+              }}
+            {% else %}
+              {{ 'image' | placeholder_svg_tag: 'copa-model-image placeholder' }}
+            {% endif %}
+          </div>
+        {% endif %}
+      {% endfor %}
+    </div>
+
+    <div class="copa-product-details">
+      <div class="right-carrousel">
+        {% for block in section.blocks %}
+          {% if block.type == 'product_slide' %}
+            {% assign product = block.settings.product %}
+            <div class="copa-product-slide" data-index="{{ forloop.index0 }}">
+              <div class="copa-product-swatch">
+                {% if block.settings.swatch_image %}
+                  {{
+                    block.settings.swatch_image
+                    | img_url: 'master'
+                    | img_tag: block.settings.product_name, 'copa-swatch-image'
+                  }}
+                {% endif %}
+              </div>
+
+          <div class="copa-product-info-mobile">
+            <h2 class="copa-product-title">{{ product.title }}</h2>
+            <p class="copa-product-subtitle">{{ block.settings.product_description }}</p>
+            {% assign product_form_id = 'quick-add-' | append: section.id | append: product.id %}
+            <div class="quick-add no-js-hidden">
+            {%- liquid
+              assign qty_rules = false
+              if product.selected_or_first_available_variant.quantity_rule.min > 1 or product.selected_or_first_available_variant.quantity_rule.max != null or product.selected_or_first_available_variant.quantity_rule.increment > 1
+                assign qty_rules = true
+              endif
+            -%}
+            {%- if product.variants_count > 1 or qty_rules -%}
+              <modal-opener data-modal="#QuickAdd-{{ product.id }}">
+                <button
+                  id="{{ product_form_id }}-submit"
+                  type="submit"
+                  name="add"
+                  class="quick-add__submit button button--full-width button--secondary{% if horizontal_quick_add %} card--horizontal__quick-add animate-arrow{% endif %}"
+                  aria-haspopup="dialog"
+                  aria-labelledby="{{ product_form_id }}-submit title-{{ section_id }}-{{ product.id }}"
+                  data-product-url="{{ product.url }}"
+                >
+                  {{ 'products.product.choose_options' | t }}
+                  {%- if horizontal_quick_add -%}
+                    <span class="icon-wrap">
+                      {{- 'icon-arrow.svg' | inline_asset_content -}}
+                    </span>
+                  {%- endif -%}
+                  {%- render 'loading-spinner' -%}
+                </button>
+              </modal-opener>
+              <quick-add-modal id="QuickAdd-{{ product.id }}" class="quick-add-modal">
+                <div
+                  role="dialog"
+                  aria-label="{{ 'products.product.choose_product_options' | t: product_name: product.title | escape }}"
+                  aria-modal="true"
+                  class="quick-add-modal__content global-settings-popup"
+                  tabindex="-1"
+                >
+                  <button
+                    id="ModalClose-{{ product.id }}"
+                    type="button"
+                    class="quick-add-modal__toggle"
+                    aria-label="{{ 'accessibility.close' | t }}"
+                  >
+                    {{- 'icon-close.svg' | inline_asset_content -}}
+                  </button>
+                  <div id="QuickAddInfo-{{ product.id }}" class="quick-add-modal__content-info"></div>
+                </div>
+              </quick-add-modal>
+            {%- else -%}
+              <product-form data-section-id="{{ section.id }}">
+                {%- form 'product',
+                  product,
+                  id: product_form_id,
+                  class: 'form',
+                  novalidate: 'novalidate',
+                  data-type: 'add-to-cart-form'
+                -%}
+                  <input
+                    type="hidden"
+                    name="id"
+                    value="{{ product.selected_or_first_available_variant.id }}"
+                    class="product-variant-id"
+                    {% if product.selected_or_first_available_variant.available == false %}
+                      disabled
+                    {% endif %}
+                  >
+                  <button
+                    id="{{ product_form_id }}-submit"
+                    type="submit"
+                    name="add"
+                    class="quick-add__submit button button--full-width button--secondary{% if horizontal_quick_add %} card--horizontal__quick-add{% endif %}"
+                    aria-haspopup="dialog"
+                    aria-labelledby="{{ product_form_id }}-submit title-{{ section_id }}-{{ product.id }}"
+                    aria-live="polite"
+                    data-sold-out-message="true"
+                    {% if product.selected_or_first_available_variant.available == false %}
+                      disabled
+                    {% endif %}
+                  >
+                    <span>
+                      {%- if product.selected_or_first_available_variant.available -%}
+                        {{ 'products.product.add_to_cart' | t }}
+                      {%- else -%}
+                        {{ 'products.product.sold_out' | t }}
+                      {%- endif -%}
+                    </span>
+                    <span class="sold-out-message hidden">
+                      {{ 'products.product.sold_out' | t }}
+                    </span>
+                    {%- if horizontal_quick_add -%}
+                      <span class="icon-wrap">
+                        {{- 'icon-plus.svg' | inline_asset_content -}}
+                      </span>
+                    {%- endif -%}
+                    {%- render 'loading-spinner' -%}
+                  </button>
+                {%- endform -%}
+              </product-form>
+            {%- endif -%}
+          </div>
+          </div>
+
+              <div class="copa-pagination">
+                <span class="copa-current-slide">{{ forloop.index }}</span>/<span class="copa-total-slides">
+                  {{- section.blocks.size -}}
+                </span>
+              </div>
+            </div>
+          {% endif %}
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+</div>
+
+<style>
+
+      .quick-add__submit {
+        height: 64px;
+      }
+      .copa-product-showcase {
+        width: 100%;
+        margin: 0 auto;
+        font-family: ABCfina;
+        padding: 64px 0;
+      }
+
+      .copa-product-grid-container {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 25px;
+        overflow: hidden;
+      }
+
+      .copa-product-models {
+        position: relative;
+        overflow: hidden;
+        background-color: #f5f5f5;
+        width: 100%;
+        height: 100%;
+        min-height: 100%;
+        border-radius: 13px;
+      }
+
+      .copa-model-slide {
+        display: none;
+        width: 100%;
+        height: 100%;
+      }
+
+      .copa-model-slide.active {
+        display: block;
+      }
+
+      .copa-model-image {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+
+      .copa-product-details {
+        display: flex;
+        padding: 2rem;
+        flex-direction: column;
+        justify-content: center;
+        max-width: 100%;
+        width: 100%;
+        min-width: 100%;
+        background-color: #f6f6f8;
+        border-radius: 13px;
+    }
+      }
+
+      .copa-product-carousel {
+        position: relative;
+      }
+
+      .copa-product-slide {
+        display: none;
+      }
+
+      .copa-product-slide.active {
+        display: block;
+      }
+
+      .copa-swatch-image {
+        border-radius: 50%;
+        overflow: hidden;
+      }
+      
+      .copa-product-swatch {
+        display: grid;        
+        justify-items: center;
+        padding-bottom: 2rem;
+      }
+
+      .copa-swatch-image {
+        max-width: 60%;
+        height: auto;
+      }
+
+      .copa-product-reviews {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        padding-bottom: 1rem;
+      }
+
+      .copa-stars {
+        color: #999;
+      }
+
+      .copa-review-count {
+        color: #565656;
+      }
+
+      .copa-product-title {
+        text-transform: uppercase;
+        font-weight: bold;
+        padding-bottom: 0.5rem;
+        letter-spacing: normal;
+        margin: 0;
+      }
+
+      .copa-product-subtitle {
+        color: #565656;
+        padding-bottom: 2rem;
+        margin: 0;
+      }
+
+
+.product-form__buttons {
+  max-width: 100% !important;
+}
+
+      .product-form__buttons {
+        max-width: 100% !important;
+      }
+
+      .product-form__submit.button--primary {
+        background-color: #173e35;
+        color: #fff !important;
+        border: 1px solid #173e35;
+      }
+
+      .copa-button {
+        display: inline-block;
+        background-color: #fff;
+        color: #333;
+        border: 1px solid #ddd;
+        padding: 0.75rem 1.5rem;
+        border-radius: 2rem;
+        text-decoration: none;
+        font-size: 0.875rem;
+        transition: all 0.3s;
+      }
+
+      .copa-button:hover {
+        background-color: #f0f0f0;
+      }
+
+      .copa-pagination {
+        padding-top: 3rem;
+        text-align: right;
+        font-weight: bold;
+        font-size: 3rem;
+        color: #565656;
+      }
+
+
+  @media (max-width: 480px) {
+
+    .copa-product-info-mobile {
+      padding: 2rem;
+    }
+
+    .copa-pagination {
+      padding: 0 1rem !important;
+    }
+
+          .slick-slide {
+        border-radius: 13px;
+        background-color: #f6f6f8;            
+      }
+
+    .copa-product-grid-container {
+          display: none;
+        }
+
+    .mobile-carrousel {
+      display: grid;
+    }
+
+  }
+
+  @media (max-width: 768px) {
+    .copa-model-image {
+        border-radius: 13px 13px 0 0 !important;
+      }
+  }
+
+  @media (min-width: 481px) {
+    .copa-product-grid-container {
+          display: grid;
+        }
+
+    .mobile-carrousel {
+      display: none !important;
+    }
+
+      .copa-model-image {
+        border-radius: 13px;
+      }
+
+  }
+
+      @media (max-width: 768px) {
+
+
+
+        .copa-product-showcase {
+          min-width: 100%;
+        }
+        .copa-product-grid-container {
+          grid-template-columns: 1fr;
+          gap: 0 !important;
+          min-width: 100%;
+        }
+
+        .copa-product-swatch
+        {
+          display: none;
+        }
+
+        .copa-swatch-image {
+              max-width: 70%;
+        }
+
+        .copa-model-image {
+          aspect-ratio: 1 / 1;
+        }
+
+        .copa-product-models {
+          border-radius: 13px 13px 0 0;
+        }
+
+        .copa-product-details {
+          padding: 1.5rem;
+          border-radius: 0 0 13px 13px;
+          overflow: initial !important;
+        }
+
+        .slick-slider {
+          min-width: 100%;
+        }
+
+      }
+
+    /* Make sure .copa-product-details is position: relative
+     so .copa-product-carousel's absolute nav sits inside */
+  .copa-product-details {
+    position: relative;
+    overflow: hidden; /* optional, to hide any overflow */
+  }
+
+  /* Position .copa-product-carousel nav absolutely */
+  .copa-product-carousel {
+    position: relative; /* anchor for nav */
+    width: 100%;
+  }
+
+
+
+  .copa-product-details {
+    position: relative;
+    overflow: hidden;
+  }
+
+  .copa-product-carousel {
+    position: relative;
+    width: 100%;
+    max-width: 100%;
+  }
+
+  .slick-track, .slick-list  {
+    height: 100% !important;
+  }
+</style>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+      initShowCaseProductsCopa();
+    });
+
+    function initShowCaseProductsCopa() {
+
+    $('.mobile-carrousel').slick({
+    dots: false,
+    autoplay: true,
+    infinite: false,
+    speed: 300,
+    slidesToShow: 1,
+    arrows: false,
+    slidesToScroll: 1,
+    autoplay: true,
+    autoplaySpeed: 3000,
+  });
+
+    $('.left-carrousel').slick({
+    dots: false,
+    infinite: false,
+    arrows: false,
+    speed: 300,
+    asNavFor: '.right-carrousel',
+    slidesToShow: 1,
+    slidesToScroll: 1,
+    autoplay: true,
+    autoplaySpeed: 3000,
+  });
+
+    $('.right-carrousel').slick({
+    dots: false,
+    infinite: false,
+    arrows: false,
+    speed: 300,
+    asNavFor: '.left-carrousel',
+    slidesToShow: 1,
+    slidesToScroll: 1,
+  });
+
+    }
+</script>

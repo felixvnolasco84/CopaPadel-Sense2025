@@ -1,0 +1,134 @@
+.contact img {
+  max-width: 100%;
+}
+
+.contact-form-container {
+  padding: 64px 32px;
+  border-radius: 13px;
+  background-color: #f6f6f8 !important;
+}
+
+.title {
+  margin-bottom: 20px !important;
+}
+
+.contact-form-subtitle {
+
+  
+  font-size: 24px;
+  font-weight: 600;
+  color: #565656;
+  text-align: left;
+  margin-top: 0px;
+  margin-bottom: 2rem;
+  font-family: "ABCfina" !important;
+}
+
+.contact .form__message {
+  align-items: flex-start;
+}
+
+.contact .icon-success {
+  margin-top: 0.2rem;
+}
+
+.contact .field {
+  margin-bottom: 1.5rem;
+}
+
+@media screen and (min-width: 750px) {
+  .contact .field {
+    margin-bottom: 2rem;
+  }
+}
+
+.contact__button {
+  margin-top: 2rem;
+}
+
+@media screen and (min-width: 750px) {
+  .contact__button {
+    margin-top: 2rem;
+  }
+}
+
+@media screen and (min-width: 750px) {
+  .contact__fields {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-column-gap: 2rem;
+  }
+}
+
+.field__label {
+  padding-top: 2px;
+  padding-left: 10px !important;
+
+}
+.field__input {
+  border-radius: 13px !important;
+  border: 1px solid #8e8e8e !important;
+  padding: 16px 32px !important;
+  font-size: 16px !important;
+  font-family: "ABCfina" !important;  
+  color: #565656 !important;
+}
+
+.button-primary {
+  background-color: #000 !important;
+  color: #fff !important;
+  border-radius: 13px !important;
+  padding: 16px 32px !important;
+  font-size: 16px !important;
+  font-family: "ABCfina" !important;
+}
+
+.custom-contact-form-container {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-column-gap: 2rem;
+}
+
+@media screen and (max-width: 749px) {
+  .custom-contact-form-container {
+    grid-template-columns: 1fr;
+    grid-column-gap: 0px;
+    padding: 32px 16px !important;
+    gap: 32px !important;    
+  }
+
+}
+
+.social-media-content-title {
+  font-size: 24px;
+  color: #565656;
+  font-family: "ABCfina" !important;
+  margin-top: 0px;
+  margin-bottom: 10px;
+}
+
+.social-media-content-items {
+  display: flex;
+  flex-direction: row;
+  gap: 1rem;
+}
+
+.social-media-content-schedule {
+  font-size: 14px;
+  color: #565656;
+  font-family: "ABCfina" !important;
+  margin-top: 10px;
+  margin-bottom: 20px;
+}
+
+.social-media-content-item-link {
+  color: #8e8e8e !important;
+  text-decoration: none;
+  width: 32px;
+  height: 32px;
+}
+
+.custom-contact-form-container .field {
+  margin-top: 20px;  
+  margin-bottom: 0px !important;
+}

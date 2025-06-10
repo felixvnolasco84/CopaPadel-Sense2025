@@ -1,0 +1,330 @@
+{{ 'base.css' | asset_url | stylesheet_tag }}
+{{ 'component-slider.css' | asset_url | stylesheet_tag }}
+{{ 'slick.css' | asset_url | stylesheet_tag }}
+
+<script src="{{ 'jquery-3.7.1.min.js' | asset_url }}" defer="defer"></script>
+<script src="{{ 'slick.min.js' | asset_url }}" defer="defer"></script>
+
+<div class="testimonials-showcase {% if section.settings.layout == 'contained' %}container{% endif %}">
+  {% if section.settings.section_title != blank %}
+    <h2 class="testimonials-title">{{ section.settings.section_title }}</h2>
+  {% endif %}
+  
+  <div class="testimonials-carousel">
+    {% for block in section.blocks %}
+      {% if block.type == 'testimonial' %}
+        <div class="testimonial-slide" data-index="{{ forloop.index0 }}">
+          <div class="testimonial-content">
+            {% if block.settings.source_testimonial %}
+              <img class="social-media-icon" src="{{ block.settings.source_testimonial | img_url: '50x' }}" />
+            {% endif %}
+            <div class="testimonial-text">
+              <p>{{ block.settings.testimonial_description }}</p>
+            </div>
+          </div>
+          <div class="testimonial-footer">
+            {% if block.settings.testimonial_image %}
+              <img 
+                src="{{ block.settings.testimonial_image | img_url: '150x150', crop: 'center' }}"
+                alt="Foto de {{ block.settings.testimonial_name }}"
+                class="testimonial-author-image"
+              >
+            {% endif %}
+            <div class="testimonial-author-info">
+              <p class="testimonial-name">{{ block.settings.testimonial_name }}</p>
+              <span class="testimonial-role">{{ block.settings.testimonial_role }}</span>
+            </div>
+          </div>
+        </div>
+      {% endif %}
+    {% endfor %}
+  </div>
+</div>
+
+<style>
+
+
+.testimonials-title {
+  font-size: 4rem !important;
+  font-weight: 600 !important;
+}
+@media screen and (max-width: 749px) {
+  .testimonials-title {
+    font-size: 2.5rem !important;
+  }
+}
+
+  .testimonials-showcase {
+    width: 100%;
+    margin: 0 auto;
+    font-family: 'ABCfina', sans-serif;
+  }
+  
+  .testimonials-title {
+    text-align: center;
+    font-size: 2.5rem;
+    margin-bottom: 2rem;
+    color: #163E35;
+  }
+  
+  .testimonials-carousel {
+    width: 100%;
+    padding: 60px 30px;
+    background-color: #f6f6f8;
+    border-radius: 13px;
+  }
+  
+  .testimonial-slide {
+    padding: 0 20px;
+    height: 100%;
+  }
+  
+  .testimonial-content {
+    position: relative;
+    background-color: #163E35;
+    color: #FFFFFF !important;
+    border-radius: 13px;
+    padding: 32px;
+    margin-bottom: 20px;
+    aspect-ratio: 16/9;
+    overflow: hidden;
+  }
+  
+  .testimonial-content::before {
+    content: '';
+    position: absolute;
+    bottom: -10px;
+    left: 25px;
+    width: 30px;
+    height: 30px;
+    background-color: #163E35;
+    clip-path: polygon(100% 100%, 0 0, 100% 0);
+    transform: rotate(135deg);
+  }
+  
+  .social-media-icon {
+    position: absolute;
+    top: 14px;
+    left: 14px;
+    width: 24px;
+    height: 24px;
+    object-fit: contain;
+  }
+  
+  .testimonial-text {
+    height: 100%;
+    display: flex;
+    align-items: center;
+  }
+  
+  .testimonial-text p {
+    margin: 0;
+    color: #fff;
+    font-size: 13px;
+    line-height: 1.5;
+  }
+  
+  .testimonial-footer {
+    display: flex;
+    align-items: center;
+    padding: 10px 0;
+  }
+  
+  .testimonial-author-image {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    margin-right: 15px;
+    object-fit: cover;
+  }
+  
+  .testimonial-author-info {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .testimonial-name {
+    margin: 0;
+    font-weight: bold;
+    font-size: 18px;
+    color: #1A1A1A;
+  }
+  
+  .testimonial-role {
+    font-size: 14px;
+    color: #777;
+  }
+  
+  /* Responsive styles */
+  @media (max-width: 768px) {
+    .testimonials-title {
+      font-size: 1.8rem;
+      margin-bottom: 1.5rem;
+    }
+    
+    .testimonials-carousel {
+      padding: 30px 0;
+    }
+    
+    .testimonial-slide {
+      padding: 0 15px;
+    }
+    
+    .testimonial-content {
+      padding: 24px;
+      aspect-ratio: 1/1;
+    }
+    
+    .testimonial-text {
+      align-items: flex-start;
+      overflow-y: auto;
+    }
+    
+    .testimonial-text p {
+      color: #fff;      
+      line-height: 1.4;
+      margin-top: 40px;
+    }
+    
+    .testimonial-author-image {
+      width: 60px;
+      height: 60px;
+    }
+    
+    .testimonial-name {
+      font-size: 16px;
+    }
+    
+    .testimonial-role {
+      font-size: 12px;
+    }
+  }
+  
+  /* Custom scrollbar for testimonial content */
+  .testimonial-text::-webkit-scrollbar {
+    width: 4px;
+  }
+  
+  .testimonial-text::-webkit-scrollbar-thumb {
+    background-color: rgba(255,255,255,0.3);
+    border-radius: 4px;
+  }
+</style>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    initTestimonialsCarousel();
+  });
+
+  function initTestimonialsCarousel() {
+    $('.testimonials-carousel').slick({
+      dots: false,
+      infinite: true,
+      speed: 300,
+      slidesToShow: 3,
+      slidesToScroll: 1,
+      arrows: true,
+      autoplay: true,
+      autoplaySpeed: 5000,
+      responsive: [
+        {
+          breakpoint: 1200,
+          settings: {
+            slidesToShow: 2
+          }
+        },
+        {
+          breakpoint: 768,
+          settings: {
+            slidesToShow: 1,
+            centerMode: true,
+            centerPadding: '40px'
+          }
+        },
+        {
+          breakpoint: 480,
+          settings: {
+            slidesToShow: 1,
+            centerMode: true,
+            centerPadding: '20px',
+            arrows: false
+          }
+        }
+      ]
+    });
+  }
+</script>
+
+{% schema %}
+{
+  "name": "Testimoniales",
+  "tag": "section",
+  "class": "section",
+  "settings": [
+    {
+      "type": "text",
+      "id": "section_title",
+      "label": "Título de la sección",
+      "default": "Testiomonios"
+    },
+    {
+      "type": "select",
+      "id": "layout",
+      "label": "Layout",
+      "options": [
+        {
+          "value": "full",
+          "label": "Ancho completo"
+        },
+        {
+          "value": "contained",
+          "label": "Contenido"
+        }
+      ],
+      "default": "full"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "testimonial",
+      "name": "Testimonio",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "source_testimonial",
+          "label": "Red Social - Testimonio"
+        },
+        {
+          "type": "text",
+          "id": "testimonial_name",
+          "label": "Nombre",
+          "default": "Toño De la Vega"
+        },
+        {
+          "type": "text",
+          "id": "testimonial_role",
+          "label": "Rol o Título",
+          "default": "Campeón Amateur"
+        },
+        {
+          "type": "textarea",
+          "id": "testimonial_description",
+          "label": "Descripción",
+          "default": "Me pareció una raqueta muy bien balanceada..."
+        },
+        {
+          "type": "image_picker",
+          "id": "testimonial_image",
+          "label": "Imagen de perfil"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Testimoniales",
+      "blocks": []
+    }
+  ]
+}
+{% endschema %}

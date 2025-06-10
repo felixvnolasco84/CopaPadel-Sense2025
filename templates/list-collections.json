@@ -1,0 +1,88 @@
+ {
+  "sections": {
+    "main": {
+      "type": "main-list-collections",
+      "disabled": true,
+      "settings": {
+        "title": "Todos los productos",
+        "sort": "alphabetical",
+        "image_ratio": "square",
+        "columns_desktop": 4,
+        "columns_mobile": "2"
+      }
+    },
+    "collection_list_4bAbik": {
+      "type": "collection-list",
+      "blocks": {
+        "featured_collection_MYeeP9": {
+          "type": "featured_collection",
+          "settings": {
+            "collection": "palas"
+          }
+        },
+        "featured_collection_jJEbMq": {
+          "type": "featured_collection",
+          "settings": {
+            "collection": "bundles-promociones"
+          }
+        },
+        "featured_collection_8QcT6w": {
+          "type": "featured_collection",
+          "settings": {
+            "collection": "accesorios"
+          }
+        },
+        "featured_collection_nrjwJH": {
+          "type": "featured_collection",
+          "settings": {
+            "collection": "gorras-y-viseras"
+          }
+        },
+        "featured_collection_FbB6pL": {
+          "type": "featured_collection",
+          "settings": {
+            "collection": "fundas-y-mochilas"
+          }
+        },
+        "featured_collection_V4DG6n": {
+          "type": "featured_collection",
+          "settings": {
+            "collection": "ropa-de-hombre"
+          }
+        },
+        "featured_collection_kJnDKY": {
+          "type": "featured_collection",
+          "settings": {
+            "collection": "ropa-de-mujer"
+          }
+        }
+      },
+      "block_order": [
+        "featured_collection_MYeeP9",
+        "featured_collection_jJEbMq",
+        "featured_collection_8QcT6w",
+        "featured_collection_nrjwJH",
+        "featured_collection_FbB6pL",
+        "featured_collection_V4DG6n",
+        "featured_collection_kJnDKY"
+      ],
+      "name": "t:sections.collection-list.presets.name",
+      "settings": {
+        "title": "Descubre nuestra selección exclusiva de productos.",
+        "heading_size": "h2",
+        "image_ratio": "square",
+        "columns_desktop": 4,
+        "color_scheme": "",
+        "show_view_all": false,
+        "columns_mobile": "1",
+        "swipe_on_mobile": false,
+        "padding_top": 36,
+        "padding_bottom": 36
+      }
+    }
+  },
+  "order": [
+    "main",
+    "collection_list_4bAbik"
+  ]
+}

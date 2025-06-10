@@ -1,0 +1,76 @@
+
+ {
+  "name": "t:sections.footer.name",
+  "type": "footer",
+  "sections": {
+    "custom_liquid_kyNaAx": {
+      "type": "custom-liquid",
+      "name": "t:sections.custom-liquid.presets.name",
+      "settings": {
+        "custom_liquid": "{% render 'footer-custom' %}",
+        "color_scheme": "",
+        "padding_top": 0,
+        "padding_bottom": 0
+      }
+    },
+    "footer": {
+      "type": "footer",
+      "blocks": {
+        "linklist": {
+          "type": "link_list",
+          "settings": {
+            "heading": "Menu",
+            "menu": "main-menu"
+          }
+        },
+        "text-0": {
+          "type": "text",
+          "settings": {
+            "heading": "Our Store",
+            "subtext": "<p>Share contact information, store details, and brand content with your customers.</p>"
+          }
+        },
+        "image": {
+          "type": "image",
+          "settings": {
+            "image_width": 200,
+            "alignment": "center"
+          }
+        },
+        "de942aa7-bf06-428b-aed1-c7a3fad27ec4": {
+          "type": "link_list",
+          "disabled": true,
+          "settings": {
+            "heading": "Quick links",
+            "menu": "footer"
+          }
+        }
+      },
+      "block_order": [
+        "linklist",
+        "text-0",
+        "image",
+        "de942aa7-bf06-428b-aed1-c7a3fad27ec4"
+      ],
+      "disabled": true,
+      "settings": {
+        "color_scheme": "accent-2",
+        "newsletter_enable": false,
+        "newsletter_heading": "Subscribe to our emails",
+        "enable_follow_on_shop": true,
+        "show_social": false,
+        "enable_country_selector": false,
+        "enable_language_selector": false,
+        "payment_enable": true,
+        "show_policy": true,
+        "margin_top": 0,
+        "padding_top": 32,
+        "padding_bottom": 32
+      }
+    }
+  },
+  "order": [
+    "custom_liquid_kyNaAx",
+    "footer"
+  ]
+}

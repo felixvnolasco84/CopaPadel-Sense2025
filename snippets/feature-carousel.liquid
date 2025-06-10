@@ -1,0 +1,137 @@
+{%- assign features = product.metafields.custom.product_features.value -%}
+{%- assign show_mobile_slider = true -%}
+
+{%- if features != blank -%}
+  <slider-component class="slider-mobile-gutter feature-carousel{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}">
+    <ul
+      class="feature-list contains-card contains-card--feature{% if settings.card_style == 'standard' %} contains-card--standard{% endif %} grid grid--3-col-desktop grid--1-col-tablet-down{% if show_mobile_slider %} slider slider--tablet grid--peek{% endif %} feature-list--{{ features.size }}-items"
+      id="Slider-features-{{ product.id }}"
+      role="list"
+    >
+      {%- liquid
+        assign columns = features.size
+        if columns > 3
+          assign columns = 3
+        endif
+      -%}
+      
+      {%- for feature_gid in features -%}
+        {%- assign feature = feature_gid | metaobject -%}
+        <li
+          id="Slide-features-{{ product.id }}-{{ forloop.index }}"
+          class="feature-list__item grid__item{% if show_mobile_slider %} slider__slide{% endif %}{% if feature.image == blank %} feature-list__item--no-media{% endif %}{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}"
+          {% if settings.animations_reveal_on_scroll %}
+            data-cascade
+            style="--animation-order: {{ forloop.index }};"
+          {% endif %}
+        >
+          <div class="feature-card">
+            <div class="feature-image">
+              {%- if feature.image != blank -%}
+                <img 
+                  src="{{ feature.image | image_url: width: 600 }}" 
+                  alt="{{ feature.title }}" 
+                  loading="lazy"
+                  width="360" 
+                  height="{{ 360 | divided_by: feature.image.aspect_ratio | round }}"
+                >
+              {%- endif -%}
+            </div>
+            
+            <div class="feature-content">
+              {%- assign finalTitle = feature.title | split: "|" -%}
+              {%- if finalTitle[0] -%}
+                <h3 class="feature-title">{{ finalTitle[0] }}</h3>
+              {%- endif -%}
+              
+              <p class="feature-description">
+                {{ feature.description }}
+              </p>
+            </div>
+          </div>
+        </li>
+      {%- endfor -%}
+    </ul>
+    
+    {%- if show_mobile_slider -%}
+      <div class="slider-buttons">
+        <button
+          type="button"
+          class="slider-button slider-button--prev"
+          name="previous"
+          aria-label="{{ 'general.slider.previous_slide' | t }}"
+        >
+          <span class="svg-wrapper">
+            {{- 'icon-caret.svg' | inline_asset_content -}}
+          </span>
+        </button>
+        
+        <div class="slider-counter caption">
+          <span class="slider-counter--current">1</span>
+          <span aria-hidden="true"> / </span>
+          <span class="visually-hidden">{{ 'general.slider.of' | t }}</span>
+          <span class="slider-counter--total">{{ features.size }}</span>
+        </div>
+        
+        <button
+          type="button"
+          class="slider-button slider-button--next"
+          name="next"
+          aria-label="{{ 'general.slider.next_slide' | t }}"
+        >
+          <span class="svg-wrapper">
+            {{- 'icon-caret.svg' | inline_asset_content -}}
+          </span>
+        </button>
+      </div>
+    {%- endif -%}
+  </slider-component>
+{%- else -%}
+  <div class="feature-carousel-wrapper">
+    <p class="no-features">No product features available</p>
+  </div>
+{%- endif -%}
+
+<style>
+  .feature-card {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .feature-title {
+    margin: 0;
+  }
+
+  .feature-content {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .feature-description {
+    margin: 0;
+    text-align: center;
+  }
+
+  .feature-carousel {
+    margin: 64px 0;
+  }  
+
+  .feature-image {
+    max-width: 360px;
+  }
+
+  .feature-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 50%;
+  }
+  
+  
+</style>

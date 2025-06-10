@@ -1,0 +1,245 @@
+
+ {
+  "sections": {
+    "main": {
+      "type": "main-page",
+      "disabled": true,
+      "settings": {
+        "padding_top": 36,
+        "padding_bottom": 36
+      }
+    },
+    "gracias_deporte_X8H6e6": {
+      "type": "gracias-deporte",
+      "name": "Gracias Deporte",
+      "settings": {
+        "description": "<p>ENRIQUE CORQUERA COPA PADEL 1969 ®</p><p>Copa, nace para conmemorar el legado que nos dejó Don Enrique Corcuera y tiene como intención llevarte a través del tiempo y hacerte parte del movimiento que dio inicio a nuestro deporte en 1969. </p><p>Nuestra marca está enfocada en desarrollar productos que llevan una fusión entre la época de oro y las necesidades del atleta moderno.</p>",
+        "image_logo": "shopify://shop_images/Firma_-_Dark.png"
+      }
+    },
+    "image_with_text_ytbw33": {
+      "type": "image-with-text",
+      "blocks": {
+        "heading_QURAbL": {
+          "type": "heading",
+          "settings": {
+            "heading": "GRACIAS POR JUGAR NUESTRO DEPORTE",
+            "heading_size": "h2"
+          }
+        },
+        "text_B7JJEF": {
+          "type": "text",
+          "settings": {
+            "text": "",
+            "text_style": "body"
+          }
+        },
+        "button_PxP4YN": {
+          "type": "button",
+          "settings": {
+            "button_label": "VER PRODUCTOS",
+            "button_link": "shopify://collections",
+            "button_style_secondary": true
+          }
+        }
+      },
+      "block_order": [
+        "heading_QURAbL",
+        "text_B7JJEF",
+        "button_PxP4YN"
+      ],
+      "name": "t:sections.image-with-text.presets.name",
+      "settings": {
+        "image": "shopify://shop_images/Enmascarar_grupo_53_2x_92b2ed82-5b86-4f75-926c-db9cc54897ec.png",
+        "height": "medium",
+        "desktop_image_width": "medium",
+        "layout": "image_first",
+        "image_behavior": "none",
+        "content_layout": "no-overlap",
+        "desktop_content_position": "top",
+        "desktop_content_alignment": "left",
+        "mobile_content_alignment": "left",
+        "section_color_scheme": "scheme-2",
+        "color_scheme": "scheme-2",
+        "padding_top": 36,
+        "padding_bottom": 36
+      }
+    },
+    "custom_grid_section_cB3dWR": {
+      "type": "custom-grid-section",
+      "blocks": {
+        "grid_item_PKa9CT": {
+          "type": "grid_item",
+          "settings": {
+            "image": "shopify://shop_images/Timeline-1.png",
+            "title": "Primeros pasos. - (1960-1968)",
+            "description": "Enrique Corcuera pone una red de cancha de tenis en una cancha de frontón en su hacienda de Jalisco Estipac, le parece divertido la combinación de los dos deportes, la velocidad del tenis y el rebote de pared del frontón.",
+            "url": ""
+          }
+        },
+        "grid_item_qmX3Wd": {
+          "type": "grid_item",
+          "settings": {
+            "image": "shopify://shop_images/Timeline-2.png",
+            "title": "Paddle Corcuera. - (1969)",
+            "description": "Enrique Corcuera compra una casa en Las Brisas Acapulco Guerrero, México. El espacio de su jardín es reducido y decide hacer una cancha de Paddle de 20 metros por 10. Decide llamar a su nuevo invento Paddle Corcuera.",
+            "url": ""
+          }
+        },
+        "grid_item_qMgCyU": {
+          "type": "grid_item",
+          "settings": {
+            "image": "shopify://shop_images/Timeline-3.png",
+            "title": "Hotel Marbella Club. - (1974)",
+            "description": "El Príncipe Alfonso de Hohenlohe conoce el Paddle Corcuera mientras vacaciona con su amigo Enrique en Acapulco, de regreso a España decide poner una cancha igual en su nuevo desarrollo inmobiliario en España el Marbella Club. Lo llaman Paddle.",
+            "url": ""
+          }
+        },
+        "grid_item_kAryhq": {
+          "type": "grid_item",
+          "settings": {
+            "image": "shopify://shop_images/Timeline-4.png",
+            "title": "Reglamento. - (1985)",
+            "description": "Hay varias canchas de Paddle Corcuera en México, Argentina y España. Viviana Corcuera con ayuda de su marido Enrique decide crear un reglamento oficial para el Paddle Corcuera.",
+            "url": ""
+          }
+        },
+        "grid_item_KAwXVN": {
+          "type": "grid_item",
+          "settings": {
+            "image": "shopify://shop_images/Captura_de_pantalla_2025-05-30_a_las_12.12.41_p.m..png",
+            "title": "Primera Federación. - (1987)",
+            "description": "Se funda la Asociación Platense de Paddle, la primera entidad institucional relacionada con el Padel en el mundo. un año después Oscar “Cacho” Nicastro funda la APA la primera asociación nacional de Padel en el mundo.",
+            "url": ""
+          }
+        },
+        "grid_item_faQfGc": {
+          "type": "grid_item",
+          "settings": {
+            "image": "shopify://shop_images/Timeline-5_e45446e0-008e-423e-a670-dc38b97fe8ad.png",
+            "title": "Promoción Internacional. - (1990)",
+            "description": "Viviana y Enrique Corcuera viajan promoviendo el Padel a Argentina, España y México. Viviana con Placido Domingo gran promotor del Padel en Acapulco.",
+            "url": ""
+          }
+        },
+        "grid_item_ekt6dA": {
+          "type": "grid_item",
+          "settings": {
+            "image": "shopify://shop_images/channels4_profile.jpg",
+            "title": "Federación Internacional de Padel. - (1991)",
+            "description": "Julio Alegría es el primer presidente de la FIP y un año después se celebra el primer Campeonato del mundo con la participación de 11 países.",
+            "url": ""
+          }
+        },
+        "grid_item_4yRV8p": {
+          "type": "grid_item",
+          "settings": {
+            "image": "shopify://shop_images/Timeline-6.png",
+            "title": "Federación Mexicana de Padel. - (1993)",
+            "description": "Enrique y Viviana con su buen amigo el Notario Ignacio Soto Borja fundan la Federación Mexicana de Padel. se decide cambiar el nombre de Paddle Corcuera a PADEL.",
+            "url": ""
+          }
+        },
+        "grid_item_JX48E3": {
+          "type": "grid_item",
+          "settings": {
+            "image": "shopify://shop_images/Timeline-7.png",
+            "title": "Primera Copa Corcuera. - (1993)",
+            "description": "Primer torneo Internacional de Padel en el mundo en el Hotel Villavera en Acapulco organizada por Ignacio Soto Borja, Cacho Nicastro , Viviana y Luis Corcuera.",
+            "url": ""
+          }
+        },
+        "grid_item_wCzxrg": {
+          "type": "grid_item",
+          "settings": {
+            "image": "shopify://shop_images/Timeline-8_0848ec2d-6b9d-4449-ab13-e25c68481703.png",
+            "title": "Creador del Padel. - (1999)",
+            "description": "El  WORLD PADEL TOUR es una colaboracion entre las federaciones del Padel del mundo y la Asociasion de Jugadores profecionales de Padel. Participan los mejores jugadores de Padel del mundo en la rama Varonil y Femenil.",
+            "url": ""
+          }
+        },
+        "grid_item_3QNemb": {
+          "type": "grid_item",
+          "settings": {
+            "image": "shopify://shop_images/Timeline-9.png",
+            "title": "WPT. - 2013",
+            "description": "2013 primer World Padel Tour.",
+            "url": ""
+          }
+        },
+        "grid_item_intEw8": {
+          "type": "grid_item",
+          "settings": {
+            "image": "shopify://shop_images/Timeline-10_2118f138-3eee-498d-83f2-ef971a7afcfd.png",
+            "title": "Reconocimiento - (2022)",
+            "description": "Junio 2022 Senado de la\nRepública Mexicana reconoce a\nDon Enrique Corcuera como creador del Pádel.",
+            "url": ""
+          }
+        },
+        "grid_item_3F8DRE": {
+          "type": "grid_item",
+          "settings": {
+            "image": "shopify://shop_images/Captura_de_pantalla_2025-05-30_a_las_12.10.24_p.m..png",
+            "title": "Premier Padel Acapulco. - (2024)",
+            "description": "El padel profesional regresa a su casa en Acapulco. Enrique Corcuera Jr,  Gerardo Suarez, Felipe Madero, Manuel Manterolay Raynard Picard fundan COPA Padel para darle promocion al Padel como deporte mexicano.",
+            "url": ""
+          }
+        }
+      },
+      "block_order": [
+        "grid_item_PKa9CT",
+        "grid_item_qmX3Wd",
+        "grid_item_qMgCyU",
+        "grid_item_kAryhq",
+        "grid_item_KAwXVN",
+        "grid_item_faQfGc",
+        "grid_item_ekt6dA",
+        "grid_item_4yRV8p",
+        "grid_item_JX48E3",
+        "grid_item_wCzxrg",
+        "grid_item_3QNemb",
+        "grid_item_intEw8",
+        "grid_item_3F8DRE"
+      ],
+      "settings": {
+        "title": "HISTORIA DEL PÁDEL A TRAVÉS DE LOS AÑOS.",
+        "subtitle": "",
+        "title_color": "#163e35",
+        "subtitle_color": "#777777",
+        "layout": "full",
+        "columns_desktop": 4,
+        "columns_mobile": 2,
+        "grid_gap": 10,
+        "grid_gap_mobile": 15,
+        "max_width": 1800,
+        "item_background_color": "#ffffff",
+        "item_title_color": "#163e35",
+        "item_description_color": "#555555",
+        "item_border_radius": 13,
+        "maintain_aspect_ratio": true,
+        "image_aspect_ratio": "4/3",
+        "background_color": "#ffffff",
+        "padding_top": 60,
+        "padding_bottom": 0,
+        "margin_top": 0,
+        "margin_bottom": 0
+      }
+    },
+    "video_text_back_dwBjJk": {
+      "type": "video-text-back",
+      "name": "Video Right",
+      "settings": {
+        "title": "<p>Join the legacy. <br> Play Copa</p>",
+        "description": "<p>En Copa buscamos inspirar a las nuevas generaciones de jugadores redescubriendo el pasado y construyendo el futuro del pádel.</p>",
+        "video_link": ""
+      }
+    }
+  },
+  "order": [
+    "main",
+    "gracias_deporte_X8H6e6",
+    "image_with_text_ytbw33",
+    "custom_grid_section_cB3dWR",
+    "video_text_back_dwBjJk"
+  ]
+}

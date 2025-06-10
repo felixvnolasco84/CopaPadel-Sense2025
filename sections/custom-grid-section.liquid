@@ -1,0 +1,451 @@
+{% comment %}
+  Section: Custom Grid Section
+  Muestra un grid de elementos personalizados con imagen, título y descripción.
+  Cada elemento es completamente configurable a través de bloques.
+{% endcomment %}
+
+<section class="custom-grid-section {% if section.settings.layout == 'contained' %}container{% endif %}" 
+  style="background-color: {{ section.settings.background_color }}; 
+         margin-top: {{ section.settings.margin_top }}px; 
+         margin-bottom: {{ section.settings.margin_bottom }}px;
+         padding-top: {{ section.settings.padding_top }}px;
+         padding-bottom: {{ section.settings.padding_bottom }}px;">
+  
+  {% if section.settings.title != blank %}
+    <h2 class="custom-grid-title">{{ section.settings.title }}</h2>
+  {% endif %}
+  
+  {% if section.settings.subtitle != blank %}
+    <p class="custom-grid-subtitle">{{ section.settings.subtitle }}</p>
+  {% endif %}
+  
+  {% if section.blocks.size > 0 %}
+    <div class="custom-grid"
+         style="grid-template-columns: repeat({{ section.settings.columns_desktop }}, 1fr);
+                grid-gap: {{ section.settings.grid_gap }}px;">
+      
+      {% for block in section.blocks %}
+        <div class="custom-grid-item" {{ block.shopify_attributes }}>
+          <a href="{{ block.settings.url }}" class="custom-grid-link {% if block.settings.url == blank %}no-link{% endif %}">
+            <div class="custom-grid-image-container">
+              {% if block.settings.image != blank %}
+                <img 
+                  src="{{ block.settings.image | img_url: 'master' }}"
+                  alt="{{ block.settings.title | escape }}"
+                  class="custom-grid-image"
+                  loading="lazy"
+                  width="{{ block.settings.image.width }}"
+                  height="{{ block.settings.image.height }}"
+                >
+              {% else %}
+                {{ 'image' | placeholder_svg_tag: 'custom-grid-image placeholder' }}
+              {% endif %}
+            </div>
+            
+            <div class="custom-grid-content">
+              {% if block.settings.title != blank %}
+                <h3 class="custom-grid-item-title">{{ block.settings.title }}</h3>
+              {% endif %}
+              
+              {% if block.settings.description != blank %}
+                <div class="custom-grid-item-description">{{ block.settings.description }}</div>
+              {% endif %}
+            </div>
+          </a>
+        </div>
+      {% endfor %}
+    </div>
+  {% else %}
+    <div class="custom-grid-empty">
+      <p>Añade bloques para mostrar contenido en el grid.</p>
+    </div>
+  {% endif %}
+</section>
+
+<style>
+  .custom-grid-section {
+    width: 100%;
+    position: relative;
+    font-family: 'ABCfina', sans-serif;
+  }
+  
+  .custom-grid-title {
+    text-align: center;
+    font-weight: 600;
+    font-size: 4rem;
+    margin-top: 0;
+    margin-bottom: 4rem;
+    color: {{ section.settings.title_color }};
+  }
+  
+  .custom-grid-subtitle {
+    text-align: center;
+    font-size: 2.5rem;
+    margin-top: 0;
+    margin-bottom: 2.5rem;
+    color: {{ section.settings.subtitle_color }};
+  }
+  
+  .custom-grid {
+    display: grid;
+    width: 100%;
+    margin: 0 auto;
+    max-width: {{ section.settings.max_width }}px;
+  }
+  
+  .custom-grid-item {
+    border: 1px solid #e2e2e9;
+    border-radius: 13px;
+    width: 100%;
+    margin-bottom: 20px;
+  }
+  
+  .custom-grid-link {
+    display: block;
+    height: 100%;
+    text-decoration: none;
+    color: inherit;
+    background-color: {{ section.settings.item_background_color }};
+    border-radius: {{ section.settings.item_border_radius }}px;
+    overflow: hidden;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+  
+  .custom-grid-link:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+  }
+  
+  .custom-grid-link.no-link {
+    cursor: default;
+  }
+  
+  .custom-grid-image-container {
+    width: 100%;
+    position: relative;
+    overflow: hidden;
+    {% if section.settings.maintain_aspect_ratio %}
+    aspect-ratio: {{ section.settings.image_aspect_ratio }};
+    {% endif %}
+  }
+  
+  .custom-grid-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.5s ease;
+  }
+  
+  .custom-grid-link:hover .custom-grid-image {
+    transform: scale(1.05);
+  }
+  
+  .custom-grid-content {
+    padding: 20px;
+  }
+
+
+  
+  .custom-grid-item-title {
+    font-size: 1.5rem;
+    margin-top: 0;
+    margin-bottom: 10px;
+    color: {{ section.settings.item_title_color }};
+  }
+  
+  .custom-grid-item-description {
+    font-size: 1.2rem;
+    line-height: 1.5;
+    color: {{ section.settings.item_description_color }};
+  }
+  
+  .custom-grid-empty {
+    text-align: center;
+    padding: 2rem;
+    background-color: #f8f8f8;
+    border-radius: 8px;
+  }
+  
+  @media screen and (max-width: 767px) {
+    .custom-grid-title {
+      font-size: 2.5rem;
+      margin-bottom: 1rem;
+    }
+    
+    .custom-grid-subtitle {
+      font-size: 1.5rem;
+      margin-bottom: 1.5rem;
+    }
+
+    
+    .custom-grid {
+      grid-template-columns: repeat({{ section.settings.columns_mobile }}, 1fr) !important;
+      grid-gap: {{ section.settings.grid_gap_mobile }}px !important;
+    }
+    
+    .custom-grid-item-title {
+      font-size: 1.2rem;
+    }
+    
+    .custom-grid-content {
+      padding: 15px;
+    }
+  }
+</style>
+
+{% schema %}
+{
+  "name": "Grid Personalizado",
+  "tag": "section",
+  "class": "custom-grid-section",
+  "settings": [
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Título",
+      "default": "Nuestro Grid Personalizado"
+    },
+    {
+      "type": "text",
+      "id": "subtitle",
+      "label": "Subtítulo",
+      "default": "Explora nuestro contenido"
+    },
+    {
+      "type": "color",
+      "id": "title_color",
+      "label": "Color del título",
+      "default": "#163E35"
+    },
+    {
+      "type": "color",
+      "id": "subtitle_color",
+      "label": "Color del subtítulo",
+      "default": "#777777"
+    },
+    {
+      "type": "select",
+      "id": "layout",
+      "label": "Diseño",
+      "options": [
+        {
+          "value": "full",
+          "label": "Ancho completo"
+        },
+        {
+          "value": "contained",
+          "label": "Contenido"
+        }
+      ],
+      "default": "contained"
+    },
+    {
+      "type": "header",
+      "content": "Configuración del grid"
+    },
+    {
+      "type": "range",
+      "id": "columns_desktop",
+      "min": 1,
+      "max": 5,
+      "step": 1,
+      "label": "Columnas en escritorio",
+      "default": 3
+    },
+    {
+      "type": "range",
+      "id": "columns_mobile",
+      "min": 1,
+      "max": 3,
+      "step": 1,
+      "label": "Columnas en móvil",
+      "default": 2
+    },
+    {
+      "type": "range",
+      "id": "grid_gap",
+      "min": 10,
+      "max": 60,
+      "step": 5,
+      "label": "Espacio entre items (desktop)",
+      "default": 30
+    },
+    {
+      "type": "range",
+      "id": "grid_gap_mobile",
+      "min": 5,
+      "max": 30,
+      "step": 5,
+      "label": "Espacio entre items (móvil)",
+      "default": 15
+    },
+    {
+      "type": "range",
+      "id": "max_width",
+      "min": 800,
+      "max": 2000,
+      "step": 100,
+      "label": "Ancho máximo",
+      "default": 1400
+    },
+    {
+      "type": "header",
+      "content": "Estilo de los items"
+    },
+    {
+      "type": "color",
+      "id": "item_background_color",
+      "label": "Color de fondo del item",
+      "default": "#FFFFFF"
+    },
+    {
+      "type": "color",
+      "id": "item_title_color",
+      "label": "Color del título del item",
+      "default": "#163E35"
+    },
+    {
+      "type": "color",
+      "id": "item_description_color",
+      "label": "Color de la descripción del item",
+      "default": "#555555"
+    },
+    {
+      "type": "range",
+      "id": "item_border_radius",
+      "min": 0,
+      "max": 30,
+      "step": 1,
+      "label": "Radio del borde",
+      "default": 8
+    },
+    {
+      "type": "checkbox",
+      "id": "maintain_aspect_ratio",
+      "label": "Mantener proporción de imagen",
+      "default": true
+    },
+    {
+      "type": "select",
+      "id": "image_aspect_ratio",
+      "label": "Proporción de imagen",
+      "options": [
+        {
+          "value": "1/1",
+          "label": "Cuadrado (1:1)"
+        },
+        {
+          "value": "16/9",
+          "label": "Horizontal (16:9)"
+        },
+        {
+          "value": "4/3",
+          "label": "Horizontal (4:3)"
+        },
+        {
+          "value": "2/3",
+          "label": "Vertical (2:3)"
+        },
+        {
+          "value": "3/4",
+          "label": "Vertical (3:4)"
+        }
+      ],
+      "default": "16/9"
+    },
+    {
+      "type": "header",
+      "content": "Configuración general"
+    },
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "Color de fondo",
+      "default": "#FFFFFF"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 100,
+      "step": 10,
+      "label": "Padding superior",
+      "default": 60
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 100,
+      "step": 10,
+      "label": "Padding inferior",
+      "default": 60
+    },
+    {
+      "type": "range",
+      "id": "margin_top",
+      "min": 0,
+      "max": 100,
+      "step": 10,
+      "label": "Margen superior",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "margin_bottom",
+      "min": 0,
+      "max": 100,
+      "step": 10,
+      "label": "Margen inferior",
+      "default": 0
+    }
+  ],
+  "blocks": [
+    {
+      "type": "grid_item",
+      "name": "Item del Grid",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Imagen"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Título",
+          "default": "Título del item"
+        },
+        {
+          "type": "textarea",
+          "id": "description",
+          "label": "Descripción",
+          "default": "Añade aquí una breve descripción de este elemento"
+        },
+        {
+          "type": "url",
+          "id": "url",
+          "label": "Enlace (opcional)"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Grid Personalizado",
+      "category": "Personalizado",
+      "blocks": [
+        {
+          "type": "grid_item"
+        },
+        {
+          "type": "grid_item"
+        },
+        {
+          "type": "grid_item"
+        }
+      ]
+    }
+  ]
+}
+{% endschema %} 
